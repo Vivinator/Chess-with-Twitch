@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Queen : ChessPiece {
 
+	/*public override bool [,] PossibleMove()
+	{
+		
+	}*/
 
 }

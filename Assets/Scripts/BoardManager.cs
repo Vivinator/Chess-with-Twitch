@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour {
 
 	private void Start()
 	{
+		Instance = this;
 		SpawnAllChessPieces ();
 	}
 	
@@ -71,6 +72,22 @@ public class BoardManager : MonoBehaviour {
 	{
 		if (allowedMoves[x,y])
 		{
+			ChessPiece c = ChessPieces [x, y];
+
+			if (c != null && c.isWhite != isWhiteTurn)
+			{
+				// Capture a piece
+
+				// If it is King
+				if (c.GetType () == typeof(King))
+				{
+					// End the game
+					return;
+				}
+				activeChessPiece.Remove(c.gameObject);
+				Destroy (c.gameObject);
+			}
+
 			ChessPieces [selectedChessPiece.CurrentX, selectedChessPiece.CurrentY] = null;
 			selectedChessPiece.transform.position = GetTileCenter (x, y);
 			selectedChessPiece.SetPosition(x,y);
